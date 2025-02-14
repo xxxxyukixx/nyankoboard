@@ -86,3 +86,6 @@ SNSはたくさんありますが猫専用というものは非常に少ない�
 
 ### 画面遷移図
 https://www.figma.com/design/iK65wyINXNQaAvTqezBNBY/%E3%81%AB%E3%82%83%E3%82%93%E3%81%93%E3%81%BC%E3%83%BC%E3%81%A9%E7%94%BB%E9%9D%A2%E9%81%B7%E7%A7%BB%E5%9B%B3?node-id=0-1&p=f&t=N7Fy29nvEfPujHFC-0
+
+### ER図
+[![Image from Gyazo](https://i.gyazo.com/9660eec4015ba7cbf619767bbee45f88.png)](https://gyazo.com/9660eec4015ba7cbf619767bbee45f88)
