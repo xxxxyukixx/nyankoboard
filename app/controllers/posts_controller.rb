@@ -67,4 +67,10 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:title)
     end
+
+    def authorize_destroy
+      unless current_user.admin? || @post.user == current_user
+        redirect_to posts_path, alert: "権限がありません"
+      end
+    end
 end
