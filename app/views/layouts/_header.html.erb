@@ -4,8 +4,17 @@
       <div class="flex-shrink-0">
         <%= link_to "にゃんこぼーど", root_path, class: "text-2xl font-bold text-gray-800" %>
       </div>
-      <div class="flex items-center">
+      <div class="flex items-center space-x-4">
         <% if user_signed_in? %>
+          <%= link_to profile_path(current_user.profile), class: "flex items-center space-x-2 hover:opacity-75" do %>
+            <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+              <span class="text-gray-600 text-sm"><%= current_user.name.first.upcase %></span>
+            </div>
+            <span class="text-gray-700">
+              <%= current_user.profile.nickname.presence || current_user.name %>
+            </span>
+          <% end %>
+
           <%= link_to "ログアウト", destroy_user_session_path, 
               class: "bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg transition duration-150 ease-in-out",
               data: { "turbo-method": :delete } %>

@@ -1,16 +1,50 @@
-<p style="color: green"><%= notice %></p>
+<% content_for :title, "投稿一覧" %>
 
-<% content_for :title, "Posts" %>
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+  <div class="bg-white shadow rounded-lg p-6 mb-8">
+    <h1 class="text-2xl font-bold text-gray-900 mb-6">投稿一覧</h1>
 
-<h1>Posts</h1>
+    <div class="space-y-6">
+      <% @posts.each do |post| %>
+        <div class="relative border rounded-lg p-6 hover:shadow-md transition-shadow duration-200">
+          <%= link_to "", post_path(post), class: "absolute inset-0" %>
+          <div class="flex items-center mb-4">
+            <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+              <span class="text-gray-600 text-sm">
+                <%= display_name(post.user).first.upcase %>
+              </span>
+            </div>
+            <span class="ml-3 font-medium text-gray-900">
+              <%= display_name(post.user) %>
+            </span>
+          </div>
+          <p class="text-lg text-gray-900"><%= post.content %></p>
+          <div class="mt-4 flex justify-between items-center">
+            <span class="text-sm text-gray-500">
+              <%= l post.created_at, format: :long %>
+            </span>
+            <div class="flex space-x-4">
+              <% if current_user.admin? || post.user == current_user %>
+                <%= link_to "削除", post_path(post),
+                    data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
+                    class: "text-pink-500 hover:text-pink-600" %>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 
-<div id="posts">
-  <% @posts.each do |post| %>
-    <%= render post %>
-    <p>
-      <%= link_to "Show this post", post %>
-    </p>
-  <% end %>
+  <div class="flex justify-end space-x-4">
+    <% if user_signed_in? %>
+      <%= link_to "新規投稿", new_post_path, class: "bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600" %>
+      <% if current_user.admin? %>
+        <%= link_to "ユーザー一覧", users_path, class: "bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600" %>
+      <% end %>
+    <% else %>
+      <%= link_to "ログイン", new_user_session_path, class: "bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600" %>
+      <%= link_to "新規登録", new_user_registration_path, class: "bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600" %>
+    <% end %>
+  </div>
 </div>
-
-<%= link_to "New post", new_post_path %>
