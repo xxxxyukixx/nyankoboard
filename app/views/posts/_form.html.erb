@@ -1,22 +1,57 @@
-<%= form_with(model: post) do |form| %>
+<%= form_with(model: post, class: "space-y-6") do |form| %>
   <% if post.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-      <ul>
+    <div class="bg-red-50 border-l-4 border-red-400 p-4 rounded">
+      <h2 class="text-red-700"><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <ul class="list-disc pl-5 mt-2">
         <% post.errors.each do |error| %>
-          <li><%= error.full_message %></li>
+          <li class="text-red-600"><%= error.full_message %></li>
         <% end %>
       </ul>
     </div>
   <% end %>
 
   <div>
-    <%= form.label :content, style: "display: block" %>
-    <%= form.text_area :content %>
+    <%= form.label :content, "投稿内容", class: "block text-sm font-medium text-gray-700" %>
+    <%= form.text_area :content, class: "mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-pink-300 focus:ring focus:ring-pink-200 focus:ring-opacity-50", rows: 4 %>
   </div>
 
   <div>
-    <%= form.submit %>
+    <%= form.label :images, "画像", class: "block text-sm font-medium text-gray-700" %>
+    <%= form.file_field :images, multiple: true, accept: 'image/png',
+        class: "mt-1 block w-full text-sm text-gray-500
+                file:mr-4 file:py-2 file:px-4
+                file:rounded-full file:border-0
+                file:text-sm file:font-semibold
+                file:bg-pink-50 file:text-pink-700
+                hover:file:bg-pink-100",
+        data: { controller: "image-preview" } %>
+    <div id="image-previews" class="mt-4 grid grid-cols-4 gap-4"></div>
   </div>
+
+  <div>
+    <%= form.submit "投稿する", class: "w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-pink-500 hover:bg-pink-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-pink-500" %>
+  </div>
+<% end %>
+
+<%= javascript_tag do %>
+  document.querySelector('input[type="file"]').addEventListener('change', function(event) {
+    const previewContainer = document.getElementById('image-previews');
+    previewContainer.innerHTML = '';
+
+    Array.from(event.target.files).forEach(file => {
+      const reader = new FileReader();
+      reader.onload = function(e) {
+        const preview = document.createElement('div');
+        preview.className = 'relative aspect-square';
+        
+        const img = document.createElement('img');
+        img.src = e.target.result;
+        img.className = 'w-full h-full object-cover rounded-lg';
+        
+        preview.appendChild(img);
+        previewContainer.appendChild(preview);
+      }
+      reader.readAsDataURL(file);
+    });
+  });
 <% end %>

@@ -25,7 +25,7 @@ class ProfilesController < ApplicationController
   end
 
   def profile_params
-    params.require(:profile).permit(:nickname, :description)
+    params.require(:profile).permit(:nickname, :description, :avatar)
   end
 
   def ensure_correct_user
