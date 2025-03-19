@@ -10,6 +10,9 @@ class PostsController < ApplicationController
 
   # GET /posts/1 or /posts/1.json
   def show
+    @user = @post.user
+    pp "user.profile"
+    pp @user.profile
   end
 
   # GET /posts/new
