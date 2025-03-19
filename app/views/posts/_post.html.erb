@@ -1,7 +1,29 @@
-<div id="<%= dom_id post %>">
-  <p>
-    <strong>Title:</strong>
-    <%= post.title %>
-  </p>
+<div id="<%= dom_id post %>" class="bg-white shadow rounded-lg p-6">
+  <div class="flex items-center mb-4">
 
+    <%= link_to profile_path(@user.profile.id) do %>
+      <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+        <span class="text-gray-600 text-sm"><%= display_name(post.user).first.upcase %></span>
+      </div>
+    <% end %>
+    <%= link_to profile_path(@user.profile.id) do %>
+      <span class="ml-3 font-medium text-gray-900"><%= display_name(post.user) %></span>
+    <% end %>
+
+  </div>
+  
+  <p class="text-lg text-gray-900"><%= post.content %></p>
+  
+  <div class="mt-4 flex justify-between items-center">
+    <span class="text-sm text-gray-500">
+      <%= l post.created_at, format: :long %>
+    </span>
+    <% if post.user == current_user %>
+      <div class="flex space-x-4">
+        <%= link_to "削除", post_path(post),
+            data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
+            class: "text-pink-500 hover:text-pink-600" %>
+      </div>
+    <% end %>
+  </div>
 </div>
