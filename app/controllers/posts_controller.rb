@@ -26,6 +26,22 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user = current_user
 
+    # 画像が添付されている場合の処理
+    if params[:post][:images].present?
+      params[:post][:images].each do |image|
+        next if image.blank?
+
+        image.rewind if image.respond_to?(:rewind)
+        # アップロード時にWebPに変換
+        blob = ActiveStorage::Blob.create_and_upload!(
+          io: image,
+          filename: "#{Time.current.to_i}_#{SecureRandom.hex(4)}.webp",
+          content_type: "image/webp"
+        )
+        @post.images.attach(blob)
+      end
+    end
+
     respond_to do |format|
       if @post.save
         format.html { redirect_to @post, notice: "Post was successfully created." }
@@ -68,7 +84,7 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:content)
+      params.require(:post).permit(:content, images: [])
     end
 
     def authorize_destroy
