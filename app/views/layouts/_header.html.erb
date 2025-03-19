@@ -5,10 +5,12 @@
         <%= link_to "にゃんこぼーど", root_path, class: "text-2xl font-bold text-gray-800" %>
       </div>
       <div class="flex items-center space-x-4">
-        <% if user_signed_in? %>
+      <% if user_signed_in? %>
+        <%= link_to profile_path(current_user.profile.id), class: "btn btn-link" do %>
           <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
             <span class="text-gray-600 text-sm"><%= current_user.name.first.upcase %></span>
           </div>
+        <% end %>
 
           <%= link_to profile_path(current_user.profile.id), class: "btn btn-link" do %>
             <span class="text-gray-700">
