@@ -26,13 +26,12 @@ class PostsController < ApplicationController
 
   # POST /posts or /posts.json
   def create
-    @post = Post.new(post_params)
+    @post = Post.new(post_params.except(:image))
     @post.user = current_user
 
     # 画像が添付されている場合の処理
-    if params[:post][:images].present?
-      params[:post][:images].each do |image|
-        next if image.blank?
+    if params[:post][:image].present?
+      image = params[:post][:image]
 
         image.rewind if image.respond_to?(:rewind)
         # アップロード時にWebPに変換
@@ -41,9 +40,8 @@ class PostsController < ApplicationController
           filename: "#{Time.current.to_i}_#{SecureRandom.hex(4)}.webp",
           content_type: "image/webp"
         )
-        @post.images.attach(blob)
+        @post.image.attach(blob)
       end
-    end
 
     respond_to do |format|
       if @post.save
@@ -74,7 +72,13 @@ class PostsController < ApplicationController
     @post.destroy!
 
     respond_to do |format|
-      format.html { redirect_to profile_path, status: :see_other, notice: "Post was successfully destroyed." }
+      format.html do
+        pp request.referer
+        redirect_url = request.referer&.include?('/profiles') ?
+          profile_path(current_user.profile) : posts_path
+
+        redirect_to redirect_url, status: :see_other, notice: "Post was successfully destroyed."
+      end
       format.json { head :no_content }
     end
   end
@@ -87,7 +91,7 @@ class PostsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def post_params
-      params.require(:post).permit(:content, images: [])
+      params.require(:post).permit(:content, :image)
     end
 
     def authorize_destroy
