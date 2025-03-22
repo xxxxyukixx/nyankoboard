@@ -12,11 +12,11 @@ class PostsController < ApplicationController
   def show
     @user = @post.user
     # プロフィールページからの遷移の場合
-    if request.referer&.include?('/profiles')
-      session[:return_to] = 'profile'
+    if request.referer&.include?("/profiles")
+      session[:return_to] = "profile"
     # ホームページからの遷移の場合
-    elsif request.referer&.include?('/posts')
-      session[:return_to] = 'posts'
+    elsif request.referer&.include?("/posts")
+      session[:return_to] = "posts"
     end
   end
 
@@ -46,7 +46,7 @@ class PostsController < ApplicationController
           content_type: "image/webp"
         )
         @post.image.attach(blob)
-      end
+    end
 
     respond_to do |format|
       if @post.save
@@ -78,7 +78,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        redirect_url = if session[:return_to] == 'profile'
+        redirect_url = if session[:return_to] == "profile"
           session.delete(:return_to) # セッションをクリア
           profile_path(current_user.profile)
         else
