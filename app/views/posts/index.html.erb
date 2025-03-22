@@ -6,39 +6,41 @@
 
     <div class="space-y-6">
       <% @posts.each do |post| %>
-        <div class="relative border rounded-lg p-6 hover:shadow-md transition-shadow duration-200">
-          <%= link_to "", post_path(post), class: "absolute inset-0" %>
-          <div class="flex items-center mb-4">
-            <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
-              <span class="text-gray-600 text-sm">
-                <%= display_name(post.user).first.upcase %>
+        <%= link_to post_path(post), class: "block" do %>
+          <div class="relative border rounded-lg p-6 hover:shadow-md transition-shadow duration-200">
+            <%= link_to "", post_path(post), class: "absolute inset-0" %>
+            <div class="flex items-center mb-4">
+            <%= render partial: 'shared/user_avatar', locals: {
+              user: post.user,
+              size: '8',
+              text_size: 'text-sm'
+            } %>
+              <span class="ml-3 font-medium text-gray-900">
+                <%= display_name(post.user) %>
               </span>
             </div>
-            <span class="ml-3 font-medium text-gray-900">
-              <%= display_name(post.user) %>
-            </span>
-          </div>
-          <p class="text-lg text-gray-900"><%= post.content %></p>
+            <p class="text-lg text-gray-900"><%= post.content %></p>
 
-          <% if post.image.attached? %>
-            <div class="mt-4 grid grid-cols-2 gap-4">
-              <%= image_tag post.image, class: "w-full h-48 object-cover rounded-lg" %>
-            </div>
-          <% end %>
+            <% if post.image.attached? %>
+              <div class="mt-4 grid grid-cols-2 gap-4">
+                  <%= image_tag post.image, class: "w-full h-48 object-cover rounded-lg" %>
+              </div>
+            <% end %>
 
-          <div class="mt-4 flex justify-between items-center">
-            <span class="text-sm text-gray-500">
-              <%= l post.created_at, format: :long %>
-            </span>
-            <div class="flex space-x-4">
-              <% if current_user && (current_user.admin? || post.user == current_user) %>
-                <%= link_to "削除", post_path(post),
-                    data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
-                    class: "text-pink-500 hover:text-pink-600" %>
-              <% end %>
+            <div class="mt-4 flex justify-between items-center">
+              <span class="text-sm text-gray-500">
+                <%= l post.created_at, format: :long %>
+              </span>
+                <% if current_user && (current_user.admin? || post.user == current_user) %>
+                  <div class="relative z-10">
+                    <%= link_to "削除", post_path(post),
+                        data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
+                        class: "text-pink-500 hover:text-pink-600" %>
+                  </div>
+                <% end %>
+              </div>
             </div>
-          </div>
-        </div>
+        <% end %>
       <% end %>
     </div>
   </div>

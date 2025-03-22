@@ -1,15 +1,15 @@
 <div id="<%= dom_id post %>" class="bg-white shadow rounded-lg p-6">
   <div class="flex items-center mb-4">
-
     <%= link_to profile_path(@user.profile.id) do %>
-      <div class="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
-        <span class="text-gray-600 text-sm"><%= display_name(post.user).first.upcase %></span>
-      </div>
+      <%= render partial: 'shared/user_avatar', locals: { 
+        user: post.user, 
+        size: '8', 
+        text_size: 'text-sm' 
+      } %>
     <% end %>
     <%= link_to profile_path(@user.profile.id) do %>
       <span class="ml-3 font-medium text-gray-900"><%= display_name(post.user) %></span>
     <% end %>
-
   </div>
 
   <p class="text-lg text-gray-900">

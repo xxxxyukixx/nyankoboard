@@ -11,8 +11,13 @@ class PostsController < ApplicationController
   # GET /posts/1 or /posts/1.json
   def show
     @user = @post.user
-    pp "user.profile"
-    pp @user.profile
+    # プロフィールページからの遷移の場合
+    if request.referer&.include?('/profiles')
+      session[:return_to] = 'profile'
+    # ホームページからの遷移の場合
+    elsif request.referer&.include?('/posts')
+      session[:return_to] = 'posts'
+    end
   end
 
   # GET /posts/new
@@ -45,7 +50,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to @post, notice: "Post was successfully created." }
+        format.html { redirect_to posts_path, notice: "Post was successfully created." }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -73,9 +78,13 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       format.html do
-        pp request.referer
-        redirect_url = request.referer&.include?('/profiles') ?
-          profile_path(current_user.profile) : posts_path
+        redirect_url = if session[:return_to] == 'profile'
+          session.delete(:return_to) # セッションをクリア
+          profile_path(current_user.profile)
+        else
+          session.delete(:return_to) # セッションをクリア
+          posts_path
+        end
 
         redirect_to redirect_url, status: :see_other, notice: "Post was successfully destroyed."
       end

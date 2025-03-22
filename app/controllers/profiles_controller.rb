@@ -11,10 +11,15 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    if @profile.update(profile_params)
+    if profile_params[:avatar].present?
+      @profile.avatar.attach(profile_params[:avatar])
+    end
+
+    # その他のパラメータの更新
+    if @profile.update(profile_params.except(:avatar))
       redirect_to profile_path(@profile), notice: "プロフィールを更新しました"
     else
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
