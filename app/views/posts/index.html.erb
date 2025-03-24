@@ -4,8 +4,8 @@
   <%= render 'search_form' %>
 </div>
 <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-  <div class="bg-white shadow rounded-lg p-6 mb-8">
-    <h1 class="text-2xl font-bold text-gray-900 mb-6">投稿一覧</h1>
+  <div class="bg-rose-50 shadow rounded-lg p-6 mb-8">
+    <h1 class="text-2xl font-bold text-gray-500 mb-6">投稿一覧</h1>
 
     <div class="space-y-6">
       <% @posts.each do |post| %>
@@ -18,11 +18,11 @@
               size: '8',
               text_size: 'text-sm'
             } %>
-              <span class="ml-3 font-medium text-gray-900">
+              <span class="ml-3 font-medium text-gray-500">
                 <%= display_name(post.user) %>
               </span>
             </div>
-            <p class="text-lg text-gray-900"><%= post.content %></p>
+            <p class="text-lg text-gray-500"><%= post.content %></p>
 
             <% if post.image.attached? %>
               <div class="mt-4 grid grid-cols-2 gap-4">
@@ -38,7 +38,7 @@
                   <div class="relative z-10">
                     <%= link_to "削除", post_path(post),
                         data: { turbo_method: :delete, turbo_confirm: "本当に削除しますか？" },
-                        class: "text-pink-500 hover:text-pink-600" %>
+                        class: "text-pink-400 hover:text-pink-500" %>
                   </div>
                 <% end %>
               </div>
@@ -50,7 +50,7 @@
 
   <div class="flex justify-end space-x-4">
     <% if user_signed_in? %>
-      <%= link_to "新規投稿", new_post_path, class: "bg-pink-500 text-white px-4 py-2 rounded-lg hover:bg-pink-600" %>
+      <%= link_to "新規投稿", new_post_path, class: "bg-rose-300 text-white px-4 py-2 rounded-lg hover:bg-rose-400" %>
       <% if current_user.admin? %>
         <%= link_to "ユーザー一覧", users_path, class: "bg-gray-500 text-white px-4 py-2 rounded-lg hover:bg-gray-600" %>
       <% end %>
