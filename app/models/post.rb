@@ -9,6 +9,6 @@ class Post < ApplicationRecord
     limit: { max: 3 }
 
     def self.ransackable_attributes(auth_object = nil)
-      ["content"]
+      [ "content" ]
     end
 end
