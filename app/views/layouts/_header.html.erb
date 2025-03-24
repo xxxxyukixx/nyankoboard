@@ -20,12 +20,20 @@
             </span>
           <% end %>
 
-          <%= link_to "ログアウト", destroy_user_session_path, 
+          <%= link_to "ログアウト", destroy_user_session_path,
               class: "bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg transition duration-150 ease-in-out",
               data: { "turbo-method": :delete } %>
+          <%= link_to "お問い合わせ", "https://docs.google.com/forms/d/e/1FAIpQLScYi56m5QkM5PbOvbumktTCnpb0wWRgVsJyoFdVcDFm0BQ-Vg/viewform",
+              target: "_blank",
+              class: "bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-150 ease-in-out" %>
+          </div>
         <% else %>
-          <%= link_to "ログイン", new_user_session_path, 
+          <%= link_to "ログイン", new_user_session_path,
               class: "bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg transition duration-150 ease-in-out" %>
+          <%= link_to "お問い合わせ", "https://docs.google.com/forms/d/e/1FAIpQLScYi56m5QkM5PbOvbumktTCnpb0wWRgVsJyoFdVcDFm0BQ-Vg/viewform",
+              target: "_blank",
+              class: "bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-150 ease-in-out" %>
+          </div>
         <% end %>
       </div>
     </div>
