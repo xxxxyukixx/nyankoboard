@@ -11,6 +11,6 @@ class Profile < ApplicationRecord
   def avatar_resize
     return unless avatar.attached?
 
-    avatar.variant(resize_to_fill: [48, 48]).processed
+    avatar.variant(resize_to_fill: [ 48, 48 ]).processed
   end
 end
