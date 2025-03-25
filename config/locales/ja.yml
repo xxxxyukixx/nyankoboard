@@ -1,0 +1,33 @@
+ja:
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M:%S"
+      long: "%Y年%m月%d日 %H時%M分"
+      short: "%m/%d %H:%M"
+  errors:
+    messages:
+      not_saved:
+        one: " %{resource} は登録できませんでした"
+        other: " %{resource} は登録できませんでした"
+      blank: "を入力してください"
+      taken: "はすでに存在します"
+      too_short: "は%{count}文字以上で入力してください"
+      confirmation: "が一致しません"
+  activerecord:
+    models:
+      user:
+        one: "ユーザー"
+        other: "ユーザー"
+    attributes:
+      user:
+        email: "メールアドレス"
+        password: "パスワード"
+        password_confirmation: "パスワード（確認用）"
+        remember_me: "ログインを記憶"
+        name: "名前"
+    errors:
+      messages:
+        blank: "を入力してください"
+        taken: "はすでに存在します"
+        too_short: "は%{count}文字以上で入力してください"
+        confirmation: "が一致しません"
