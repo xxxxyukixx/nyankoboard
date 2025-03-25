@@ -1,10 +1,16 @@
-<nav class="bg-white shadow-md">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+<nav class="bg-rose-50 shadow-md">
+  <div class="w-full">
     <div class="flex justify-between h-16 items-center">
-      <div class="flex-shrink-0">
-        <%= link_to "にゃんこぼーど", root_path, class: "text-2xl font-bold text-gray-800" %>
+      <div class="flex items-center ml-10">
+        <%= image_tag "https://illust.atam-academy.com/wp-content/uploads/%E3%81%AD%E3%81%93%E3%81%8B%E3%82%8F%E3%81%84%E3%81%84_5.png",
+            class: "h-[6.0rem] w-[6.0rem] mr-2",
+            alt: "猫のイラスト" %>
+        <%= link_to "にゃんこぼーど", root_path, class: "text-2xl font-bold text-gray-500" %>
+        <%= image_tag "https://illust.atam-academy.com/wp-content/uploads/%E3%81%AD%E3%81%93%E3%81%8B%E3%82%8F%E3%81%84%E3%81%84_4_%E9%80%8F%E9%81%8E.png",
+            class: "h-[6.0rem] w-[6.0rem] ml-2",
+            alt: "猫のイラスト" %>
       </div>
-      <div class="flex items-center space-x-4">
+      <div class="flex items-center space-x-4 mr-10">
       <% if user_signed_in? %>
         <%= link_to profile_path(current_user.profile.id), class: "btn btn-link" do %>
           <%= render partial: 'shared/user_avatar', locals: {
@@ -15,24 +21,24 @@
       <% end %>
 
           <%= link_to profile_path(current_user.profile.id), class: "btn btn-link" do %>
-            <span class="text-gray-700">
+            <span class="text-gray-500">
               <%= current_user.profile.nickname.presence || current_user.name %>
             </span>
           <% end %>
 
           <%= link_to "ログアウト", destroy_user_session_path,
-              class: "bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg transition duration-150 ease-in-out",
+              class: "bg-blue-300 hover:bg-blue-400 text-gray-500 px-4 py-2 rounded-lg transition duration-150 ease-in-out",
               data: { "turbo-method": :delete } %>
           <%= link_to "お問い合わせ", "https://docs.google.com/forms/d/e/1FAIpQLScYi56m5QkM5PbOvbumktTCnpb0wWRgVsJyoFdVcDFm0BQ-Vg/viewform",
               target: "_blank",
-              class: "bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-150 ease-in-out" %>
+              class: "bg-purple-300 hover:bg-purple-400 text-gray-500 px-4 py-2 rounded-lg transition duration-150 ease-in-out" %>
           </div>
         <% else %>
           <%= link_to "ログイン", new_user_session_path,
-              class: "bg-pink-500 hover:bg-pink-600 text-white px-4 py-2 rounded-lg transition duration-150 ease-in-out" %>
+              class: "bg-blue-300 hover:bg-blue-400 text-gray-500 px-4 py-2 rounded-lg transition duration-150 ease-in-out" %>
           <%= link_to "お問い合わせ", "https://docs.google.com/forms/d/e/1FAIpQLScYi56m5QkM5PbOvbumktTCnpb0wWRgVsJyoFdVcDFm0BQ-Vg/viewform",
               target: "_blank",
-              class: "bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-150 ease-in-out" %>
+              class: "bg-purple-300 hover:bg-purple-400 text-gray-500 px-4 py-2 rounded-lg transition duration-150 ease-in-out" %>
           </div>
         <% end %>
       </div>

@@ -1,4 +1,4 @@
-<div class="w-<%= size %> h-<%= size %> rounded-full">
+<div class="rounded-full overflow-hidden" style="width: 3rem; height: 3rem;">
   <% if user.profile.avatar.attached? %>
     <%= image_tag user.profile.avatar, class: "w-full h-full rounded-full object-cover" %>
   <% else %>

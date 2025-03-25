@@ -1,11 +1,9 @@
 <% content_for :title, "New post" %>
 
-<h1>New post</h1>
-
 <%= render "form", post: @post %>
 
 <br>
 
 <div>
-  <%= link_to "Back to posts", posts_path %>
+  <%= link_to "戻る", posts_path, class: "bg-pink-400 text-white px-4 py-2 rounded-lg hover:bg-pink-500" %>
 </div>

@@ -1,11 +1,11 @@
 <div class="min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
-  <div class="max-w-lg w-full bg-white rounded-lg shadow-lg p-10">
-    <h1 class="text-center text-3xl font-bold text-gray-900 mb-8">プロフィール編集</h1>
+  <div class="max-w-lg w-full bg-fuchsia-50 rounded-lg shadow-lg p-10">
+    <h1 class="text-center text-3xl font-bold text-gray-500 mb-8">プロフィール編集</h1>
 
     <%= form_with(model: @profile, local: true, multipart: true, class: "space-y-6") do |f| %>
       <%# アバター画像のプレビューと選択部分 %>
       <div class="space-y-4">
-        <label class="block text-sm font-medium text-gray-700">プロフィール画像</label>
+        <label class="block text-sm font-medium text-gray-500">プロフィール画像</label>
 
         <%# 現在の画像またはデフォルトアイコンの表示 %>
         <div class="flex items-center space-x-4">
@@ -46,7 +46,7 @@
 
       <div class="flex justify-end mt-6">
         <%= f.submit '更新する',
-            class: "bg-pink-500 hover:bg-pink-600 text-white font-bold py-2 px-4 rounded-lg transition duration-150 ease-in-out" %>
+            class: "bg-rose-300 hover:bg-rose-400 text-white font-bold py-2 px-4 rounded-lg transition duration-150 ease-in-out" %>
       </div>
     <% end %>
   </div>

@@ -1,18 +1,17 @@
-<div id="<%= dom_id post %>" class="bg-white shadow rounded-lg p-6">
+<div id="<%= dom_id post %>" class="bg-rose-50 shadow rounded-lg p-6">
   <div class="flex items-center mb-4">
     <%= link_to profile_path(@user.profile.id) do %>
-      <%= render partial: 'shared/user_avatar', locals: { 
-        user: post.user, 
-        size: '8', 
-        text_size: 'text-sm' 
+      <%= render partial: 'shared/user_avatar', locals: {
+        user: post.user,
+        text_size: 'text-sm'
       } %>
     <% end %>
     <%= link_to profile_path(@user.profile.id) do %>
-      <span class="ml-3 font-medium text-gray-900"><%= display_name(post.user) %></span>
+      <span class="ml-3 font-medium text-gray-500"><%= display_name(post.user) %></span>
     <% end %>
   </div>
 
-  <p class="text-lg text-gray-900">
+  <p class="text-lg text-gray-500">
     <%= post.content %></p>
 
     <% if post.image.attached? %>
