@@ -18,6 +18,12 @@ ja:
       user:
         one: "ユーザー"
         other: "ユーザー"
+      profile:
+        one: "プロフィール"
+        other: "プロフィール"
+      post:
+        one: "投稿"
+        other: "投稿"
     attributes:
       user:
         email: "メールアドレス"
@@ -25,9 +31,29 @@ ja:
         password_confirmation: "パスワード（確認用）"
         remember_me: "ログインを記憶"
         name: "名前"
+      profile:
+        avatar: "プロフィール画像"
+        nickname: "ニックネーム"
+        description: "自己紹介"
+      post:
+        content: "投稿内容"
+        image: "画像"
     errors:
       messages:
         blank: "を入力してください"
         taken: "はすでに存在します"
         too_short: "は%{count}文字以上で入力してください"
         confirmation: "が一致しません"
+      models:
+        profile:
+          attributes:
+            avatar:
+              invalid_format: "はPNG形式のみ許可されています"
+        post:
+          attributes:
+            content:
+              blank: "を入力してください"
+              too_long: "は%{count}文字以内で入力してください"
+            image:
+              content_type: "はPNG形式のみ許可されています"
+              too_large: "のサイズは5MB以下にしてください"
