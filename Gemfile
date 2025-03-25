@@ -40,6 +40,8 @@ gem "active_storage_validations"
 
 gem "devise", "~> 4.9", ">= 4.9.4"
 
+gem "devise-i18n"
+
 gem "ransack", "4.2.1"
 
 group :development, :test do
