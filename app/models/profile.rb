@@ -7,4 +7,11 @@ class Profile < ApplicationRecord
   validates :avatar,
     content_type: [ "image/png" ],
     size: { less_than: 1.megabytes }
+
+    def avatar_resize
+      return unless avatar.attached?
+
+      avatar.variant(resize_to_fill: [48, 48]).processed
+    end
+  end
 end

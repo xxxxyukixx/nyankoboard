@@ -4,7 +4,6 @@
       <div class="flex items-center space-x-4">
       <%= render partial: 'shared/user_avatar', locals: {
         user: @profile.user,
-        size: '8',
         text_size: 'text-sm'
       } %>
         <div>
@@ -27,7 +26,6 @@
             <div class="flex items-center mb-4">
               <%= render partial: 'shared/user_avatar', locals: {
                   user: post.user,
-                  size: '8',
                   text_size: 'text-sm'
                 } %>
               <span class="ml-3 font-medium text-gray-500"><%= post.user.profile.nickname %></span>
