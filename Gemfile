@@ -42,7 +42,7 @@ gem "devise", "~> 4.9", ">= 4.9.4"
 
 gem "devise-i18n"
 
-gem "ransack", "4.2.1"
+gem "ransack", "4.3.0"
 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
