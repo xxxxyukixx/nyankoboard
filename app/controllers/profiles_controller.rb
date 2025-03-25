@@ -11,12 +11,31 @@ class ProfilesController < ApplicationController
   end
 
   def update
+    @profile = Profile.find(params[:id])
+    @profile.assign_attributes(profile_params.except(:avatar))
+
     if profile_params[:avatar].present?
-      @profile.avatar.attach(profile_params[:avatar])
+      avatar = profile_params[:avatar]
+
+      unless avatar.content_type == "image/png"
+        @profile.errors.add(:avatar, "はPNG形式のみ許可されています")
+        render :edit, status: :unprocessable_entity
+        return # 処理を中断
+      end
+
+      avatar.rewind if avatar.respond_to?(:rewind)
+
+      blob = ActiveStorage::Blob.create_and_upload!(
+        io: avatar,
+        filename: "#{Time.current.to_i}_#{SecureRandom.hex(4)}.webp",
+        content_type: "image/webp"
+        )
+
+      @profile.avatar.attach(blob)
     end
 
     # その他のパラメータの更新
-    if @profile.update(profile_params.except(:avatar))
+    if @profile.save
       redirect_to profile_path(@profile), notice: "プロフィールを更新しました"
     else
       render :edit, status: :unprocessable_entity
