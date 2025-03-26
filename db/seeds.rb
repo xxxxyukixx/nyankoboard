@@ -8,10 +8,10 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
-if Rails.env.production? && !User.exists?(email: ENV['ADMIN_EMAIL'])
-  User.create!(
+if Rails.env.production?
+  admin_user = User.find_or_initialize_by(email: ENV['ADMIN_EMAIL'])
+  admin_user.update!(
     username: ENV['ADMIN_USERNAME'],
-    email: ENV['ADMIN_EMAIL'],
     password: ENV['ADMIN_PASSWORD'],
     admin: true
   )
