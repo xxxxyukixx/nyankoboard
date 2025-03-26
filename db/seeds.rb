@@ -10,6 +10,7 @@
 
 if Rails.env.production? && !User.exists?(email: ENV['ADMIN_EMAIL'])
   User.create!(
+    username: ENV['ADMIN_USERNAME'],
     email: ENV['ADMIN_EMAIL'],
     password: ENV['ADMIN_PASSWORD'],
     admin: true
