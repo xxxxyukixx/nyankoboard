@@ -16,4 +16,3 @@ if Rails.env.production?
     admin: true
   )
 end
-
