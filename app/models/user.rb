@@ -8,7 +8,7 @@ class User < ApplicationRecord
                   uniqueness: { case_sensitive: false }, # unique: true に対応
                   length: { minimum: 3, maximum: 30 }    # 任意の長さ制限
 
-  has_many :posts
+  has_many :posts, dependent: :destroy
   has_one :profile, dependent: :destroy
 
   after_create :create_default_profile  # ユーザー作成後に実行
